@@ -1,5 +1,7 @@
 const mySql = require('mysql');
 const bcrypt = require('bcrypt');
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 
 var con = mySql.createConnection({
     host: "127.0.0.1",
@@ -10,12 +12,17 @@ var con = mySql.createConnection({
 
   con.connect(function(err){
 
-    if(err) {
+    if(err) {   
         console.log(err);
         return;
     }
 
 });
+const sessionStore = new MySQLStore({
+    checkExpirationInterval: 900000,
+    expiration: 86400000,
+
+}, con);
 
 class UserModel  {
 
