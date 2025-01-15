@@ -136,7 +136,7 @@ class UserController  {
         }
 
       }
-      console.log("/${activationToken}");
+      console.log(`/${activationToken}`);
       res.send(data);
   
     });
